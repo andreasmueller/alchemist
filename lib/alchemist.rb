@@ -538,7 +538,7 @@ module Alchemist
     [1.0, unit]
   end
 
-  def self.is_si_unit(unit)
+  def self.is_si_unit?(unit)
     return @@si_units.include?(unit.to_s)
   end
   

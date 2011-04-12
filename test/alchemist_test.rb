@@ -84,8 +84,8 @@ class AlchemistTest < Test::Unit::TestCase
   end
 
   def test_is_si_unit
-    assert Alchemist.is_si_unit("meter")
-    assert !Alchemist.is_si_unit("foot")
+    assert Alchemist.is_si_unit?("meter")
+    assert !Alchemist.is_si_unit?("foot")
   end
   
 end
