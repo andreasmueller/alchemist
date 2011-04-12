@@ -537,6 +537,10 @@ module Alchemist
     end
     [1.0, unit]
   end
+
+  def self.is_si_unit(unit)
+    return @@si_units.include?(unit.to_s)
+  end
   
   @@conversion_table.each do |type, conversions|
     conversions.each do |name, value|

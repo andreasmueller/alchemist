@@ -82,5 +82,10 @@ class AlchemistTest < Test::Unit::TestCase
     assert_equal(25.brix, 13.87.baume.truncate(1))    
     assert_equal(25.plato, 25.125.brix)
   end
+
+  def test_is_si_unit
+    assert Alchemist.is_si_unit("meter")
+    assert !Alchemist.is_si_unit("foot")
+  end
   
 end
