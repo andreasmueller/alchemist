@@ -1,6 +1,7 @@
 # -*- encoding: utf-8 -*-
 PKG_FILES = %w(Rakefile) +
-  Dir.glob("{lib}/**/*")
+  Dir.glob("{lib}/**/*") +
+  Dir.glob("locales/*")
 
 gem_spec = Gem::Specification.new do |gem_spec|
   gem_spec.name = 'alchemist'
