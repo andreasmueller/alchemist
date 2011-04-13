@@ -87,5 +87,10 @@ class AlchemistTest < Test::Unit::TestCase
     assert Alchemist.is_si_unit?("meter")
     assert !Alchemist.is_si_unit?("foot")
   end
+
+  def test_dBm
+    assert 1.watt.to.dBm == 30
+    assert 0.dBm.to.watt.value == 0.001
+  end
   
 end

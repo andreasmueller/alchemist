@@ -219,7 +219,8 @@ module Alchemist
       :water_horsepower => 7.46043e+2,
       :kilocalorie_per_minute => 6.973333*10, :kilocalories_per_minute => 6.973333*10,
       :kilocalorie_per_second => 4.184e+3, :kilocalories_per_second => 4.184e+3,
-      :ton_of_refrigeration => 3.516853e+3, :tons_of_refrigeration => 3.516853e+3
+      :ton_of_refrigeration => 3.516853e+3, :tons_of_refrigeration => 3.516853e+3,
+      :dBm => [Proc.new{ |p| 10**(p/10.0)/1000.0}, Proc.new{ |p| 10*Math.log10(p*1000)}]
     },
     :pressure => {
       :pascal => 1.0, :pascals => 1.0, :Pa => 1.0,
