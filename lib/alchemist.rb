@@ -469,7 +469,7 @@ module Alchemist
         types = Conversions[ @unit_name] & Conversions[ unit_name]
         if types[0] # assume first type
           if(Alchemist.conversion_table[types[0]][unit_name].is_a?(Array))
-            Alchemist.conversion_table[types[0]][unit_name][1].call(base(types[0]))
+            NumericConversion.new(Alchemist.conversion_table[types[0]][unit_name][1].call(base(types[0])), unit_name)
           else
             NumericConversion.new(base(types[0]) / (exponent * Alchemist.conversion_table[types[0]][unit_name]), unit_name)
           end

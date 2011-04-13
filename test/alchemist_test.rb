@@ -78,7 +78,7 @@ class AlchemistTest < Test::Unit::TestCase
   end
   
   def test_density
-    assert_equal(25.brix.to_f, 1.1058.sg.to.brix.truncate(1))
+    assert_equal(25.brix.to_f, 1.1058.sg.to.brix.value.truncate(1))
     assert_equal(25.brix, 13.87.baume.truncate(1))    
     assert_equal(25.plato, 25.125.brix)
   end
@@ -89,8 +89,13 @@ class AlchemistTest < Test::Unit::TestCase
   end
 
   def test_dBm
-    assert 1.watt.to.dBm == 30
+    assert 1.watt.to.dBm.value == 30
     assert 0.dBm.to.watt.value == 0.001
+  end
+
+  def test_conversion_with_proc_resultis_in_instance_of_numeric_conversion
+    assert 1.watt.to.dBm.class == Alchemist::NumericConversion
+    assert 1.watt.to.dBm.unit_name.to_s == "dBm"
   end
   
 end
