@@ -108,5 +108,10 @@ class AlchemistTest < Test::Unit::TestCase
     assert 2.celsius.unit_name_t == "Grad Celsius"
     assert 1.celsius.unit_symbol_t == "°C"
   end
+
+  def test_to_s
+    I18n.locale = "en"
+    assert 1.celsius.to_s == "1.0 °C"
+  end
   
 end

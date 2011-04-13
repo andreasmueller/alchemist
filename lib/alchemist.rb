@@ -458,7 +458,7 @@ module Alchemist
     end
     
     def to_s
-      @value.to_s
+      (@exponent*@value).to_s + " " + self.unit_symbol_t
     end
     
     def value
