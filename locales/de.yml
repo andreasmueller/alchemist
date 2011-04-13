@@ -1,0 +1,47 @@
+de:
+  units:
+    time:
+      second:
+        name: 
+          one: "Sekunde"
+          many: "Sekunden"
+        symbol: "s"
+    power:
+      watt:
+        name:
+          one: "Watt"
+          many: "Watt"
+    electromotive_force:
+      volt:
+        name:
+          one: "Volt"
+          many: "Volt"
+        symbol: "V"
+    temperature:
+      kelvin:
+        name: 
+          one: "Kelvin"
+          many: "Kelvin"
+        symbol: "K"
+      celsius: 
+        name:
+          one: "Grad Celsius"
+          many: "Grad Celsius"
+        symbol: "°C"
+      fahrenheit:
+        name:
+          one: "Grad Fahrenheit"
+          many: "Grad Fahrenheit"
+        symbol: "°F"
+    illuminance:
+      lux:
+        name:
+          one: "Lux"
+          many: "Lux"
+        symbol: "lx"
+    pressure:
+      pascal:
+        name:
+          one: "Pascal"
+          many: "Pascal"
+        symbol: "Pa"

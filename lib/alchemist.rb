@@ -1,3 +1,11 @@
+require 'rubygems' if RUBY_VERSION < '1.9'
+require 'i18n'
+
+# load locales - code taken from m9t - see https://github.com/joeyates/m9t/blob/master/lib/m9t.rb
+locales_path = File.expand_path(File.join(File.dirname(__FILE__), '..', 'locales'))
+I18n.load_path += Dir.glob("#{ locales_path }/*.yml")
+I18n.reload!
+
 module Alchemist
   @use_si = false
   class << self
@@ -435,6 +443,18 @@ module Alchemist
     
     def unit_name
       @unit_name
+    end
+
+    def unit_name_t # returns the translated unit name
+      if @value == 1
+        return I18n.t("units.#{Conversions[@unit_name]}.#{@unit_name}.name.one")
+      else
+        return I18n.t("units.#{Conversions[@unit_name]}.#{@unit_name}.name.many")
+      end
+    end
+
+    def unit_symbol_t # returns the translated unit symbol
+      return I18n.t("units.#{Conversions[@unit_name]}.#{@unit_name}.symbol")
     end
     
     def to_s

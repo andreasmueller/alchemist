@@ -97,5 +97,16 @@ class AlchemistTest < Test::Unit::TestCase
     assert 1.watt.to.dBm.class == Alchemist::NumericConversion
     assert 1.watt.to.dBm.unit_name.to_s == "dBm"
   end
+
+  def test_i18n
+    I18n.locale = "en"
+    assert 1.celsius.unit_name_t == "degree celsius"
+    assert 2.celsius.unit_name_t == "degrees celsius"
+    assert 1.celsius.unit_symbol_t == "°C"
+    I18n.locale = "de"
+    assert 1.celsius.unit_name_t == "Grad Celsius"
+    assert 2.celsius.unit_name_t == "Grad Celsius"
+    assert 1.celsius.unit_symbol_t == "°C"
+  end
   
 end
