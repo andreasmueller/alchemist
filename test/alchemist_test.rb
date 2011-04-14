@@ -113,5 +113,17 @@ class AlchemistTest < Test::Unit::TestCase
     I18n.locale = "en"
     assert 1.celsius.to_s == "1.0 °C"
   end
+
+  def test_to_regional_unit
+    assert 10.kelvin.to_regional_unit("us").unit_name.to_s == "fahrenheit" 
+    assert 10.kelvin.to_regional_unit("ch").unit_name.to_s == "celsius" 
+    # also works with locales:
+    I18n.locale = "en"
+    assert 10.kelvin.to_regional_unit("us").unit_name_t == "degrees fahrenheit" 
+    assert 10.kelvin.to_regional_unit("ch").unit_name_t == "degrees celsius" 
+    I18n.locale = "de"
+    assert 10.kelvin.to_regional_unit("us").unit_name_t == "Grad Fahrenheit" 
+    assert 10.kelvin.to_regional_unit("ch").unit_name_t == "Grad Celsius" 
+  end
   
 end

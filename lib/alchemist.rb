@@ -18,6 +18,24 @@ module Alchemist
   @@si_units += %w[becquerel becquerels Bq curie curies Ci]
   @@si_units += %w[kelvin]
   @@si_units += %w[second seconds s]
+
+  @@common_metric_units = {
+    :time => :second,
+    :temperature => :celsius,
+    :electromotive_force => :volt,
+    :power => :watt,
+    :illuminance => :lux,
+    :pressure => :pascal
+  }
+  @@common_imperial_units = {
+    :time => :second,
+    :temperature => :fahrenheit,
+    :electromotive_force => :volt,
+    :power => :watt,
+    :illuminance => :lux,
+    :power => :psi
+  }
+
   @@operator_actions = {}
   @@conversion_table = {
     :absorbed_radiation_dose => {
@@ -360,6 +378,14 @@ module Alchemist
   def self.operator_actions
     @@operator_actions
   end
+
+  def self.common_metric_units
+    @@common_metric_units
+  end
+
+  def self.common_imperial_units
+    @@common_imperial_units
+  end
   
   class CompoundNumericConversion
     attr_accessor :numerators, :denominators
@@ -459,6 +485,30 @@ module Alchemist
     
     def to_s
       (@exponent*@value).to_s + " " + self.unit_symbol_t
+    end
+
+    def get_regional_unit(country)
+      target_unit = nil
+      if Conversions.has_key?(@unit_name.to_sym)
+        unit_type = Conversions[@unit_name.to_sym][0]
+        if country.to_s.downcase == "us" # assume imperial
+          if Alchemist.common_imperial_units.has_key?(unit_type)
+            target_unit = Alchemist.common_imperial_units[unit_type]
+          end
+        else # assume metric
+          if Alchemist.common_metric_units.has_key?(unit_type)
+            target_unit = Alchemist.common_metric_units[unit_type]
+          end
+        end
+      end
+      if not target_unit
+        raise Exception, "Unit #{@unit_name} not supported for country #{country}"
+      end
+      return target_unit
+    end
+
+    def to_regional_unit(country)
+      return self.to(get_regional_unit(country))
     end
     
     def value
