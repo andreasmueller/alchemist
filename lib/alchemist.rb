@@ -473,6 +473,10 @@ module Alchemist
       @unit_name
     end
 
+    def prefix_name
+      @prefix_name
+    end
+
     def unit_name_t # returns the translated unit name
       if @value == 1
         return I18n.t("units.#{Conversions[@unit_name]}.#{@prefix_name}#{@unit_name}.name.one")
@@ -526,7 +530,7 @@ module Alchemist
     end
 
     def <=>(other)
-      (self.to_f * @exponent).to_f <=> other.to(@unit_name).to_f
+      (self.to_f * @exponent).to_f <=> other.to(@prefix_name.to_s + @unit_name.to_s).to_f
     end
 
     private
@@ -564,6 +568,9 @@ module Alchemist
           raise Exception, "Incompatible Types"
         end
       else
+        # Operations convert to default unit (therefore remove prefix)
+        @prefix_name = nil
+
         if args[0] && args[0].is_a?(NumericConversion) && Alchemist.operator_actions[unit_name]
           t1 = Conversions[ @unit_name ][0]
           t2 = Conversions[ args[0].unit_name ][0]

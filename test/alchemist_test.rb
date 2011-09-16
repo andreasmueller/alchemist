@@ -12,11 +12,11 @@ class Float
 end
 
 class AlchemistTest < Test::Unit::TestCase
-  
+
   def test_equivalence
     assert_equal(1.m, 1.meter)
   end
-  
+
   def test_bit_and_bytes
     assert_equal( 65.bit.to_f,  (1.bit + 8.bytes).to_f )
     assert_equal( 0.125.bytes.to_f, 1.bit.to.bytes.to_f )
@@ -31,55 +31,55 @@ class AlchemistTest < Test::Unit::TestCase
     assert_in_delta(1.MB.to.b.to_f, 8000000.0, 1e-5)
     assert_in_delta(1.MB.to.kB.to_f, 1000.0, 1e-5)
   end
-  
+
   def test_feet_to_miles
     assert_equal( 5280.feet,  1.mile.to.feet )
   end
-  
+
   def test_acre_to_yards_squared
     assert_in_delta( 4840.square_yards.to_f,  1.acre.to.square_yards.to_f, 1e-5)
   end
-  
+
   def test_gallon_to_liter
     assert_in_delta( 3.785411784.L.to_f, 1.gallon.to.L.to_f, 1e-5 )
   end
-  
+
   def test_lb_to_kg
     assert_equal( 0.45359237.kg.to_f, 1.lb.to.kg.to_f )
   end
-  
+
   def test_comparison
     assert_equal( 5.grams, 0.005.kilograms )
   end
-  
+
   def test_register
     Alchemist.register(:distance, [:beard_second, :beard_seconds], 5.angstroms)
-    assert_equal( 1.beard_second, 5.angstroms)    
+    assert_equal( 1.beard_second, 5.angstroms)
     Alchemist.register(:temperature, :yeti, [Proc.new{|t| t + 1}, Proc.new{|t| t - 1}])
-    assert_equal( 0.yeti, 1.kelvin)    
+    assert_equal( 0.yeti, 1.kelvin)
   end
-  
+
   def test_meters_times_meters
     assert_equal(1.meter * 1.meter, 1.square_meter)
   end
-  
+
   def test_meters_times_meters_times_meters
     assert_equal(1.meter * 2.meter * 3.meter, 6.cubic_meters)
     assert_equal(2.square_meters * 3.meters, 6.cubic_meters)
   end
-  
+
   def test_division
     assert_equal(2.meters / 1.meters, 2.0)
   end
-  
+
   def test_temperature
     assert_equal(1.fahrenheit, 1.fahrenheit)
     assert_in_delta(1.fahrenheit, 1.fahrenheit.to.fahrenheit, 1e-5)
   end
-  
+
   def test_density
     assert_equal(25.brix.to_f, 1.1058.sg.to.brix.value.truncate(1))
-    assert_equal(25.brix, 13.87.baume.truncate(1))    
+    assert_equal(25.brix, 13.87.baume.truncate(1))
     assert_equal(25.plato, 25.125.brix)
   end
 
@@ -115,15 +115,43 @@ class AlchemistTest < Test::Unit::TestCase
   end
 
   def test_to_regional_unit
-    assert 10.kelvin.to_regional_unit("us").unit_name.to_s == "fahrenheit" 
-    assert 10.kelvin.to_regional_unit("ch").unit_name.to_s == "celsius" 
+    assert 10.kelvin.to_regional_unit("us").unit_name.to_s == "fahrenheit"
+    assert 10.kelvin.to_regional_unit("ch").unit_name.to_s == "celsius"
     # also works with locales:
     I18n.locale = "en"
-    assert 10.kelvin.to_regional_unit("us").unit_name_t == "degrees fahrenheit" 
-    assert 10.kelvin.to_regional_unit("ch").unit_name_t == "degrees celsius" 
+    assert 10.kelvin.to_regional_unit("us").unit_name_t == "degrees fahrenheit"
+    assert 10.kelvin.to_regional_unit("ch").unit_name_t == "degrees celsius"
     I18n.locale = "de"
-    assert 10.kelvin.to_regional_unit("us").unit_name_t == "Grad Fahrenheit" 
-    assert 10.kelvin.to_regional_unit("ch").unit_name_t == "Grad Celsius" 
+    assert 10.kelvin.to_regional_unit("us").unit_name_t == "Grad Fahrenheit"
+    assert 10.kelvin.to_regional_unit("ch").unit_name_t == "Grad Celsius"
   end
-  
+
+  def test_units_respect_prefix
+    I18n.locale = "en"
+    assert 1.cm.unit_name_t.to_s == "centimeter"
+    assert 10.cm.unit_name_t.to_s == "centimeters"
+    I18n.locale = "de"
+    assert 1.cm.unit_name_t.to_s == "Zentimeter"
+    assert 10.cm.unit_name_t.to_s == "Zentimeter"
+  end
+
+  def test_prefix_convertion_works
+    I18n.locale = "en"
+    assert 1.m.to.cm.unit_name_t.to_s == "centimeters"
+    assert 1.m.to.cm.to_f == 100.0
+    assert 1.m.to.cm.to.m.to_f == 1.0
+    assert 1.km.to.cm.to.m.to_f == 1000.0
+  end
+
+  def test_prefix_operations_convert_to_default_type
+    I18n.locale = "en"
+    assert (1.m + 1.cm).unit_name_t.to_s == "meters"
+    assert (1.m + 1.cm).to_f == 1.01
+    assert (1.cm + 1.m).unit_name_t.to_s == "meters"
+    assert (1.cm + 1.m).to_f == 1.01
+    assert (1.cm + 1.km).unit_name_t.to_s == "meters"
+    assert (1.cm + 1.km).to_f == 1000.01
+  end
+
 end
+

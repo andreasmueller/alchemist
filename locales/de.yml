@@ -63,8 +63,8 @@ de:
         symbol: "m"
       cm:
         name:
-          one: "Centimeter"
-          many: "Centimeter"
+          one: "Zentimeter"
+          many: "Zentimeter"
         symbol: "cm"
       feet:
         name:
