@@ -2,7 +2,12 @@ de:
   units:
     time:
       second:
-        name: 
+        name:
+          one: "Sekunde"
+          many: "Sekunden"
+        symbol: "s"
+      s:
+        name:
           one: "Sekunde"
           many: "Sekunden"
         symbol: "s"
@@ -19,11 +24,11 @@ de:
         symbol: "V"
     temperature:
       kelvin:
-        name: 
+        name:
           one: "Kelvin"
           many: "Kelvin"
         symbol: "K"
-      celsius: 
+      celsius:
         name:
           one: "Grad Celsius"
           many: "Grad Celsius"
@@ -45,3 +50,30 @@ de:
           one: "Pascal"
           many: "Pascal"
         symbol: "Pa"
+    distance:
+      meter:
+        name:
+          one: "Meter"
+          many: "Meter"
+        symbol: "m"
+      m:
+        name:
+          one: "Meter"
+          many: "Meter"
+        symbol: "m"
+      cm:
+        name:
+          one: "Centimeter"
+          many: "Centimeter"
+        symbol: "cm"
+      feet:
+        name:
+          one: "Fuss"
+          many: "Füsse"
+        symbol: "ft"
+      inch:
+        name:
+          one: "Zoll"
+          many: "Zoll"
+        symbol: "in"
+

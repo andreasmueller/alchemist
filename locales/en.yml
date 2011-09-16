@@ -2,9 +2,14 @@ en:
   units:
     time:
       second:
-        name: 
+        name:
           one: "second"
           many: "seconds"
+        symbol: "s"
+      s:
+        name:
+          one: "Sekunde"
+          many: "Sekunden"
         symbol: "s"
     power:
       watt:
@@ -19,11 +24,11 @@ en:
         symbol: "V"
     temperature:
       kelvin:
-        name: 
+        name:
           one: "kelvin"
           many: "kelvins"
         symbol: "K"
-      celsius: 
+      celsius:
         name:
           one: "degree celsius"
           many: "degrees celsius"
@@ -45,3 +50,30 @@ en:
           one: "pascal"
           many: "pascals"
         symbol: "Pa"
+    distance:
+      meter:
+        name:
+          one: "meter"
+          many: "meters"
+        symbol: "m"
+      m:
+        name:
+          one: "meter"
+          many: "meters"
+        symbol: "m"
+      cm:
+        name:
+          one: "centimeter"
+          many: "centimeters"
+        symbol: "cm"
+      feet:
+        name:
+          one: "foot"
+          many: "feet"
+        symbol: "ft"
+      inch:
+        name:
+          one: "inch"
+          many: "inches"
+        symbol: "in"
+
