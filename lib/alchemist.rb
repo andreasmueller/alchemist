@@ -539,16 +539,26 @@ module Alchemist
 
     def method_missing unit_name, *args, &block
       unit_name, prefix_name = Alchemist.parse_prefix(unit_name)
+
       @value = @value / Alchemist.unit_prefixes[prefix_name] if not prefix_name.nil?
       @value = @value * Alchemist.unit_prefixes[@prefix_name] if not @prefix_name.nil?
-      exponent = 1.0
+
+
+      if !(Conversions[ @unit_name ] & [ :information_storage ]).empty? && !Alchemist.use_si && @value >= 1000.0 && @value.to_i & -@value.to_i != @value
+        @value = @value * Alchemist.unit_prefixes[prefix_name] if not prefix_name.nil?
+        @value = @value / Alchemist.unit_prefixes[@prefix_name] if not @prefix_name.nil?
+        @value = @value / (2 ** (10 * (Math.log(Alchemist.unit_prefixes[prefix_name]) / Math.log(10)) / 3)) if not prefix_name.nil?
+        @value = @value * (2 ** (10 * (Math.log(Alchemist.unit_prefixes[@prefix_name]) / Math.log(10)) / 3)) if not @prefix_name.nil?
+      end
+
+
       if Conversions[ unit_name ]
         types = Conversions[ @unit_name] & Conversions[ unit_name]
         if types[0] # assume first type
           if(Alchemist.conversion_table[types[0]][unit_name].is_a?(Array))
             NumericConversion.new(Alchemist.conversion_table[types[0]][unit_name][1].call(base(types[0])), unit_name, 1.0, prefix_name)
           else
-            NumericConversion.new(base(types[0]) / (exponent * Alchemist.conversion_table[types[0]][unit_name]), unit_name, 1.0, prefix_name)
+            NumericConversion.new(base(types[0]) / (Alchemist.conversion_table[types[0]][unit_name]), unit_name, 1.0, prefix_name)
           end
         else
           raise Exception, "Incompatible Types"
