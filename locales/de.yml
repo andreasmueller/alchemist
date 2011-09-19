@@ -69,7 +69,7 @@ de:
       feet:
         name:
           one: "Fuss"
-          many: "Füsse"
+          many: "Fuss"
         symbol: "ft"
       inch:
         name:
