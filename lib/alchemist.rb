@@ -44,13 +44,13 @@ module Alchemist
   @@operator_actions = {}
   @@conversion_table = {
     :dimensionless => { # allow the use of alchemist for unitless conversions
-    :unitless => 1,
-    :percent => 0.01,
-    :per_mille => 0.001,
-    :parts_per_million => 1e-6,
-    :bel => [Proc.new{ |x| 10**x }, Proc.new{ |x| Math::log10(x) }],
-    :decibel => [Proc.new{ |x| 10**(x/10.0) }, Proc.new{ |x| 10.0*Math::log10(x) }]
-  },
+      :unitless => 1,
+      :percent => 0.01,
+      :per_mille => 0.001,
+      :parts_per_million => 1e-6,
+      :bel => [Proc.new{ |x| 10**x }, Proc.new{ |x| Math::log10(x) }],
+      :decibel => [Proc.new{ |x| 10**(x/10.0) }, Proc.new{ |x| 10.0*Math::log10(x) }]
+    },
     :absorbed_radiation_dose => {
       :gray => 1.0, :grays => 1.0, :Gy => 1.0,
       :rad => 1.0e-2, :rads => 1.0e-2
@@ -628,10 +628,10 @@ module Alchemist
     end
   end
 
-	def self.register_operation_conversions type, other_type, operation, converted_type
-	  @@operator_actions[operation] ||= []
+  def self.register_operation_conversions type, other_type, operation, converted_type
+    @@operator_actions[operation] ||= []
     @@operator_actions[operation] << [type, other_type, converted_type]
-	end
+  end
 
   def self.parse_prefix(unit)
     @@unit_prefixes.each do |prefix, value|
@@ -644,6 +644,10 @@ module Alchemist
 
   def self.is_si_unit?(unit)
     return @@si_units.include?(unit.to_s)
+  end
+
+  def self.is_valid_unit?(unit)
+    return Conversions.has_key?(unit.to_sym)
   end
 
   @@conversion_table.each do |type, conversions|
