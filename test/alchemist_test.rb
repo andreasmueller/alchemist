@@ -96,6 +96,14 @@ class AlchemistTest < Test::Unit::TestCase
     assert !Alchemist.is_valid_unit?("foobar")
   end
 
+  def test_is_compatible_unit
+    assert Alchemist.is_compatible_unit?("kelvin", "celsius")
+    assert Alchemist.is_compatible_unit?("fahrenheit", "celsius")
+    assert !Alchemist.is_compatible_unit?("fahrenheit", "foobar")
+    assert !Alchemist.is_compatible_unit?("foobar", "foobar")
+    assert !Alchemist.is_compatible_unit?("kelvin", "meter")
+  end
+
   def test_dBm
     assert 1.watt.to.dBm.value == 30
     assert 0.dBm.to.watt.value == 0.001

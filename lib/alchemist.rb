@@ -650,6 +650,13 @@ module Alchemist
     return Conversions.has_key?(unit.to_sym)
   end
 
+  def self.is_compatible_unit?(unit1, unit2)
+    if not (Conversions.has_key?(unit1.to_sym) and Conversions.has_key?(unit2.to_sym))
+      return false
+    end
+    return Conversions[unit1.to_sym][0] == Conversions[unit2.to_sym][0]
+  end
+
   @@conversion_table.each do |type, conversions|
     conversions.each do |name, value|
       Conversions[name] ||= []
