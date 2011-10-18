@@ -1,5 +1,36 @@
 de:
   units:
+    dimensionless:
+      unitless:
+        name:
+          one: ""
+          many: ""
+        symbol: ""
+      percent:
+        name:
+          one: "Prozent"
+          many: "Prozent"
+        symbol: "%"
+      per_mille:
+        name:
+          one: "Promille"
+          many: "Promille"
+        symbol: "‰"
+      parts_per_million:
+        name:
+          one: "part per million"
+          many: "parts per million"
+        symbol: "ppm"
+      bel:
+        name:
+          one: "Bel"
+          many: "Bel"
+        symbol: "B"
+      decibel:
+        name:
+          one: "Dezibel"
+          many: "Dezibel"
+        symbol: "dB"
     time:
       second:
         name:

@@ -18,8 +18,10 @@ module Alchemist
   @@si_units += %w[becquerel becquerels Bq curie curies Ci]
   @@si_units += %w[kelvin]
   @@si_units += %w[second seconds s]
+  @@si_units += %w[unitless]
 
   @@common_metric_units = {
+    :dimensionless => :unitless,
     :time => :second,
     :temperature => :celsius,
     :electromotive_force => :volt,
@@ -29,6 +31,7 @@ module Alchemist
     :distance => :meter
   }
   @@common_imperial_units = {
+    :dimensionless => :unitless,
     :time => :second,
     :temperature => :fahrenheit,
     :electromotive_force => :volt,
@@ -40,6 +43,14 @@ module Alchemist
 
   @@operator_actions = {}
   @@conversion_table = {
+    :dimensionless => { # allow the use of alchemist for unitless conversions
+    :unitless => 1,
+    :percent => 0.01,
+    :per_mille => 0.001,
+    :parts_per_million => 1e-6,
+    :bel => [Proc.new{ |x| 10**x }, Proc.new{ |x| Math::log10(x) }],
+    :decibel => [Proc.new{ |x| 10**(x/10.0) }, Proc.new{ |x| 10.0*Math::log10(x) }]
+  },
     :absorbed_radiation_dose => {
       :gray => 1.0, :grays => 1.0, :Gy => 1.0,
       :rad => 1.0e-2, :rads => 1.0e-2

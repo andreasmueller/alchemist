@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 $:.unshift(File.dirname(__FILE__) + '../lib')
 
 require 'test/unit'
@@ -151,6 +153,22 @@ class AlchemistTest < Test::Unit::TestCase
     assert (1.cm + 1.m).to_f == 1.01
     assert (1.cm + 1.km).unit_name_t.to_s == "meters"
     assert (1.cm + 1.km).to_f == 1000.01
+  end
+
+  def test_dimensionless_units
+    I18n.locale = "en"
+    assert 1.unitless.to_s == "1.0 "
+    assert 0.5.unitless.to.percent.to_f == 50
+    assert 0.5.unitless.to.percent.to_s == "50.0 %"
+    assert 0.5.unitless.to.percent.unit_name_t == "percent"
+    assert 0.5.unitless.to.per_mille.to_f == 500
+    assert 0.5.unitless.to.per_mille.to_s == "500.0 ‰"
+    assert 0.5.unitless.to.per_mille.to_s == "500.0 ‰"
+    assert 0.000001.unitless.to.parts_per_million.to_f == 1
+    assert 0.000001.unitless.to.parts_per_million.to_s == "1.0 ppm"
+    assert 100.unitless.to.bel.to_f == 2
+    assert 1000.unitless.to.decibel.to_f == 30
+    assert 1000.unitless.to.decibel.to_s == "30.0 dB"
   end
 
 end
