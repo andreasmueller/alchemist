@@ -47,6 +47,12 @@ en:
         name:
           one: "watt"
           many: "watts"
+        symbol: "W"
+      dBm:
+        name:
+          one: "dBm"
+          many: "dBm"
+        symbol: "dBm"
     electromotive_force:
       volt:
         name:
