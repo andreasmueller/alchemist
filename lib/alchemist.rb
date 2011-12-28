@@ -490,14 +490,14 @@ module Alchemist
 
     def unit_name_t # returns the translated unit name
       if @value == 1
-        return I18n.t("units.#{Conversions[@unit_name]}.#{@prefix_name}#{@unit_name}.name.one")
+        return I18n.t("units.#{Conversions[@unit_name][0]}.#{@prefix_name}#{@unit_name}.name.one")
       else
-        return I18n.t("units.#{Conversions[@unit_name]}.#{@prefix_name}#{@unit_name}.name.many")
+        return I18n.t("units.#{Conversions[@unit_name][0]}.#{@prefix_name}#{@unit_name}.name.many")
       end
     end
 
     def unit_symbol_t # returns the translated unit symbol
-      return I18n.t("units.#{Conversions[@unit_name]}.#{@prefix_name}#{@unit_name}.symbol")
+      return I18n.t("units.#{Conversions[@unit_name][0]}.#{@prefix_name}#{@unit_name}.symbol")
     end
 
     def to_s

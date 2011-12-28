@@ -76,7 +76,7 @@ class AlchemistTest < Test::Unit::TestCase
 
   def test_temperature
     assert_equal(1.fahrenheit, 1.fahrenheit)
-    assert_in_delta(1.fahrenheit, 1.fahrenheit.to.fahrenheit, 1e-5)
+    assert_in_delta(1.fahrenheit, 1.fahrenheit.to.celsius.to.fahrenheit, 1e-5.fahrenheit)
   end
 
   def test_density
