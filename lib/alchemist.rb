@@ -285,7 +285,7 @@ module Alchemist
       :pound_force_per_square_foot => 47.88026,
       :pound_force_per_square_inch => 6.894757e+3, :psi => 6.894757e+3,
       :torr => 1.333224e+2, :torrs => 1.333224e+2,
-      :pf_value => [Proc.new{ |pf| 100.0*10**pf}, Proc.new{ |pf| Math.log10(pf/100.0)}]
+      :pf_value => [Proc.new{ |pf| 100.0*10**pf}, Proc.new{ |pascal| Math.log10(pascal/100.0)}]
     },
     :radioactivity => {
       :becquerel => 1.0, :becquerels => 1.0, :Bq => 1.0,

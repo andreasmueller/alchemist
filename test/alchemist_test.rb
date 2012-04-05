@@ -191,11 +191,11 @@ class AlchemistTest < Test::Unit::TestCase
     assert_in_delta(2.123.pf_value, 2.123.pf_value.to.pascal.to.pf_value, 1e-10)
 
     I18n.locale = "en"
-		assert 1.pf_value.unit_name_t.to_s == "pF-value"
+    assert 1.pf_value.unit_name_t.to_s == "pF-value"
     assert 1.pf_value.unit_symbol_t == "pF"
 
     I18n.locale = "de"
-		assert 1.pf_value.unit_name_t.to_s == "pF-Wert"
+    assert 1.pf_value.unit_name_t.to_s == "pF-Wert"
     assert 1.pf_value.unit_symbol_t == "pF"
   end
 
