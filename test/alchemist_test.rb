@@ -76,7 +76,7 @@ class AlchemistTest < Test::Unit::TestCase
 
   def test_temperature
     assert_equal(1.fahrenheit, 1.fahrenheit)
-    assert_in_delta(1.fahrenheit, 1.fahrenheit.to.celsius.to.fahrenheit, 1e-5.fahrenheit)
+    assert_in_delta(1.fahrenheit, 1.fahrenheit.to.celsius.to.fahrenheit, 1e-5)
   end
 
   def test_density
@@ -183,6 +183,20 @@ class AlchemistTest < Test::Unit::TestCase
     assert 100.unitless.to.bel.to_f == 2
     assert 1000.unitless.to.decibel.to_f == 30
     assert 1000.unitless.to.decibel.to_s == "30.0 dB"
+  end
+
+  def test_pf_value
+    assert 1000.pascal.to.pf_value.to_f == 1
+    assert 3.pf_value.to.pascal.to_f == 100000
+    assert_in_delta(2.123.pf_value, 2.123.pf_value.to.pascal.to.pf_value, 1e-10)
+
+    I18n.locale = "en"
+		assert 1.pf_value.unit_name_t.to_s == "pF-value"
+    assert 1.pf_value.unit_symbol_t == "pF"
+
+    I18n.locale = "de"
+		assert 1.pf_value.unit_name_t.to_s == "pF-Wert"
+    assert 1.pf_value.unit_symbol_t == "pF"
   end
 
 end

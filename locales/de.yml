@@ -87,6 +87,11 @@ de:
           one: "Pascal"
           many: "Pascal"
         symbol: "Pa"
+      pf_value:
+        name:
+          one: "pF-Wert"
+          many: "pF-Wert"
+        symbol: "pF"
     distance:
       meter:
         name:
