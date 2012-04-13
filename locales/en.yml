@@ -62,18 +62,18 @@ en:
     temperature:
       kelvin:
         name:
-          one: "kelvin"
-          many: "kelvins"
+          one: "Kelvin"
+          many: "Kelvin"
         symbol: "K"
       celsius:
         name:
-          one: "degree celsius"
-          many: "degrees celsius"
+          one: "degree Celsius"
+          many: "degrees Celsius"
         symbol: "°C"
       fahrenheit:
         name:
-          one: "degree fahrenheit"
-          many: "degrees fahrenheit"
+          one: "degree Fahrenheit"
+          many: "degrees Fahrenheit"
         symbol: "°F"
     illuminance:
       lux:
@@ -87,6 +87,11 @@ en:
           one: "pascal"
           many: "pascals"
         symbol: "Pa"
+      psi:
+        name:
+          one: "pound per square inch"
+          many: "pounds per square inch"
+        symbol: "psi"
       pf_value:
         name:
           one: "pF-value"

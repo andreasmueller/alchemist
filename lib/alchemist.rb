@@ -39,7 +39,7 @@ module Alchemist
     :electromotive_force => :volt,
     :power => :watt,
     :illuminance => :lux,
-    :power => :psi,
+    :pressure => :psi,
     :distance => :feet
   }
 

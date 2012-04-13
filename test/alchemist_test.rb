@@ -116,8 +116,8 @@ class AlchemistTest < Test::Unit::TestCase
 
   def test_i18n
     I18n.locale = "en"
-    assert 1.celsius.unit_name_t == "degree celsius"
-    assert 2.celsius.unit_name_t == "degrees celsius"
+    assert 1.celsius.unit_name_t == "degree Celsius"
+    assert 2.celsius.unit_name_t == "degrees Celsius"
     assert 1.celsius.unit_symbol_t == "°C"
     I18n.locale = "de"
     assert 1.celsius.unit_name_t == "Grad Celsius"
@@ -135,8 +135,8 @@ class AlchemistTest < Test::Unit::TestCase
     assert 10.kelvin.to_regional_unit("ch").unit_name.to_s == "celsius"
     # also works with locales:
     I18n.locale = "en"
-    assert 10.kelvin.to_regional_unit("us").unit_name_t == "degrees fahrenheit"
-    assert 10.kelvin.to_regional_unit("ch").unit_name_t == "degrees celsius"
+    assert 10.kelvin.to_regional_unit("us").unit_name_t == "degrees Fahrenheit"
+    assert 10.kelvin.to_regional_unit("ch").unit_name_t == "degrees Celsius"
     I18n.locale = "de"
     assert 10.kelvin.to_regional_unit("us").unit_name_t == "Grad Fahrenheit"
     assert 10.kelvin.to_regional_unit("ch").unit_name_t == "Grad Celsius"
@@ -197,6 +197,17 @@ class AlchemistTest < Test::Unit::TestCase
     I18n.locale = "de"
     assert 1.pf_value.unit_name_t.to_s == "pF-Wert"
     assert 1.pf_value.unit_symbol_t == "pF"
+  end
+
+  def test_pressure
+    I18n.locale = "en"
+    assert 1.pascal.to_regional_unit('ch').unit_name_t.to_s == "pascal"
+    assert 2.pascal.to_regional_unit('ch').unit_name_t.to_s == "pascals"
+    assert 1.pascal.to_regional_unit('us').unit_name_t.to_s == "pounds per square inch"
+    I18n.locale = "de"
+    assert 1.pascal.to_regional_unit('ch').unit_name_t.to_s == "Pascal"
+    assert 2.pascal.to_regional_unit('ch').unit_name_t.to_s == "Pascal"
+    assert 1.pascal.to_regional_unit('us').unit_name_t.to_s == "pounds per square inch"
   end
 
 end

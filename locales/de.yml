@@ -87,6 +87,11 @@ de:
           one: "Pascal"
           many: "Pascal"
         symbol: "Pa"
+      psi:
+        name:
+          one: "pound per square inch"
+          many: "pounds per square inch"
+        symbol: "psi"
       pf_value:
         name:
           one: "pF-Wert"
