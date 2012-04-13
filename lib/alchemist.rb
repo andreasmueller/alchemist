@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 require 'rubygems' if RUBY_VERSION < '1.9'
 require 'i18n'
 
@@ -502,7 +504,7 @@ module Alchemist
     end
 
     def to_s
-      (@exponent * @value).to_s + " " + self.unit_symbol_t
+      (@exponent * @value).to_s + " " + self.unit_symbol_t
     end
 
     def get_regional_unit(country)
