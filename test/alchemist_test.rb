@@ -171,7 +171,8 @@ class AlchemistTest < Test::Unit::TestCase
 
   def test_dimensionless_units
     I18n.locale = "en"
-    assert 1.unitless.to_s == "1.0 "
+    assert 1.unitless.to_s == "1.0"
+    assert 2.unitless.to_s == "2.0"
     assert 0.5.unitless.to.percent.to_f == 50
     assert 0.5.unitless.to.percent.to_s == "50.0 %"
     assert 0.5.unitless.to.percent.unit_name_t == "percent"

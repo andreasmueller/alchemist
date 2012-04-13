@@ -504,7 +504,11 @@ module Alchemist
     end
 
     def to_s
-      (@exponent * @value).to_s + " " + self.unit_symbol_t
+			if @unit_name == :unitless
+				return (@exponent * @value).to_s
+			else
+				return (@exponent * @value).to_s + " " + self.unit_symbol_t
+			end
     end
 
     def get_regional_unit(country)
