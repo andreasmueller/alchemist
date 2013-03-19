@@ -1,6 +1,6 @@
 require 'rake'
 require 'rake/testtask'
-require 'rake/gempackagetask'
+require 'rubygems/package_task'
 
 task :default => [:test]
 task :test => ['test:units']
@@ -15,7 +15,7 @@ namespace :test do
 end
 
 eval("$specification = begin; #{IO.read('alchemist.gemspec')}; end")
-Rake::GemPackageTask.new($specification) do |package|
+Gem::PackageTask.new($specification) do |package|
   package.need_zip = true
   package.need_tar = true
 end

@@ -20,6 +20,9 @@ module Alchemist
   @@si_units += %w[becquerel becquerels Bq curie curies Ci]
   @@si_units += %w[kelvin]
   @@si_units += %w[second seconds s]
+  @@si_units += %w[hertz]
+  @@si_units += %w[ampere]
+  @@si_units += %w[metre_per_second metre_per_second_squared]
   @@si_units += %w[unitless]
 
   @@common_metric_units = {
@@ -136,6 +139,12 @@ module Alchemist
       :length_of_a_double_decker_bus => 8.4, :height_of_a_double_decker_bus => 4.4,
       :smoot => 1.7018, :smoots => 1.7018
     },
+		:velocity => {
+			:metre_per_second => 1
+		},
+		:acceleration  => {
+			:metre_per_second_squared => 1
+		},
     :dose_equivalent => {
       :sievert => 1.0, :sieverts => 1.0, :Si => 1.0,
       :rem => 1.0e-2, :rems => 1.0e-2
@@ -148,6 +157,9 @@ module Alchemist
       :franklin => 3.335641e-10, :franklins => 3.335641e-10, :Fr => 3.335641e-10,
       :statcoulomb => 3.335641e-10, :statcoulombs => 3.335641e-10
     },
+		:electric_current => {
+			:ampere => 1.0
+		},
     :electric_conductance => {
       :siemen => 1.0, :siemens => 1.0, :S => 1.0, :mho => 1.0,
       :abmho => 1.0e+9, :absiemen => 1.0e+9, :absiemens => 1.0e+9,
@@ -196,6 +208,10 @@ module Alchemist
       :pound_force => 4.448222, :lbf => 4.448222,
       :ton_force => 8.896443e+3
     },
+		:frequency => {
+			:hertz => 1.0,
+			:revolutions_per_minute => 0.016666666666666666
+		},
     :illuminance => {
       :lux => 1.0, :lx => 1.0, :lumens_per_square_metre => 1.0, :lumens_per_square_meter => 1.0, :lumen_per_square_metre => 1.0, :lumen_per_square_meter => 1.0,
       :phot => 1.0e+4, :phots => 1.0e+4, :ph => 1.0e+4,

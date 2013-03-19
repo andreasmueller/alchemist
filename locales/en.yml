@@ -53,6 +53,12 @@ en:
           one: "dBm"
           many: "dBm"
         symbol: "dBm"
+    electric_current:
+      ampere:
+        name:
+          one: "ampere"
+          many: "amperes"
+        symbol: "A"
     electromotive_force:
       volt:
         name:
@@ -123,4 +129,26 @@ en:
           one: "inch"
           many: "inches"
         symbol: "in"
-
+    velocity:
+      metre_per_second:
+        name:
+          one: "metre per second"
+          many: "metres per second"
+        symbol: "m/s"
+    acceleration:
+      metre_per_second_squared:
+        name:
+          one: "metre per second squared"
+          many: "metres per second squared"
+        symbol: "m/s²"
+    frequency:
+      hertz:
+        name:
+          one: "Hertz"
+          many: "Hertz"
+        symbol: "Hz"
+      revolutions_per_minute:
+        name:
+          one: "Revolution per minute"
+          many: "Revolutions per minute"
+        symbol: "RPM"

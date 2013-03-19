@@ -59,6 +59,12 @@ de:
           one: "Volt"
           many: "Volt"
         symbol: "V"
+    electric_current:
+      ampere:
+        name:
+          one: "Ampere"
+          many: "Ampere"
+        symbol: "A"
     temperature:
       kelvin:
         name:
@@ -123,4 +129,26 @@ de:
           one: "Zoll"
           many: "Zoll"
         symbol: "in"
-
+    velocity:
+      metre_per_second:
+        name:
+          one: "Meter pro Sekunde"
+          many: "Meter pro Sekunde"
+        symbol: "m/s"
+    acceleration:
+      metre_per_second_squared:
+        name:
+          one: "Meter pro Sekunde im Quadrat"
+          many: "Meter pro Sekunde im Quadrat"
+        symbol: "m/s²"
+    frequency:
+      hertz:
+        name:
+          one: "Hertz"
+          many: "Hertz"
+        symbol: "Hz"
+      revolutions_per_minute:
+        name:
+          one: "Umdrehung pro Minute"
+          many: "Umdrehungen pro Minute"
+        symbol: "RPM"

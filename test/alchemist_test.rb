@@ -211,5 +211,27 @@ class AlchemistTest < Test::Unit::TestCase
     assert 1.pascal.to_regional_unit('us').unit_name_t.to_s == "pounds per square inch"
   end
 
+	def test_frequency
+		assert 1.hertz.to.revolutions_per_minute.to_f == 60.0
+		assert 1.revolutions_per_minute.to.hertz.to_f == 1.0/60.0
+    I18n.locale = "en"
+    assert 1.hertz.unit_name_t.to_s == "Hertz"
+    assert 1.hertz.unit_symbol_t.to_s == "Hz"
+		assert 1.revolutions_per_minute.unit_name_t.to_s == "Revolution per minute"
+		assert 2.revolutions_per_minute.unit_name_t.to_s == "Revolutions per minute"
+		assert 1.revolutions_per_minute.unit_symbol_t.to_s == "RPM"
+	end
+
+	def test_electric_current
+    I18n.locale = "en"
+    assert 1.ampere.unit_name_t.to_s == "ampere"
+    assert 2.ampere.unit_name_t.to_s == "amperes"
+    assert 1.ampere.unit_symbol_t.to_s == "A"
+    I18n.locale = "de"
+    assert 1.ampere.unit_name_t.to_s == "Ampere"
+    assert 2.ampere.unit_name_t.to_s == "Ampere"
+    assert 1.ampere.unit_symbol_t.to_s == "A"
+	end
+
 end
 
