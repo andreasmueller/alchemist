@@ -29,21 +29,29 @@ module Alchemist
     :dimensionless => :unitless,
     :time => :second,
     :temperature => :celsius,
+		:frequency => :hertz,
+		:electric_current => :ampere,
     :electromotive_force => :volt,
     :power => :watt,
     :illuminance => :lux,
     :pressure => :pascal,
-    :distance => :meter
+    :distance => :meter,
+		:velocity => :metre_per_second,
+		:acceleration => :metre_per_second_squared
   }
   @@common_imperial_units = {
     :dimensionless => :unitless,
     :time => :second,
     :temperature => :fahrenheit,
+		:frequency => :hertz,
+		:electric_current => :ampere,
     :electromotive_force => :volt,
     :power => :watt,
     :illuminance => :lux,
     :pressure => :psi,
-    :distance => :feet
+    :distance => :feet,
+		:velocity => :metre_per_second,
+		:acceleration => :metre_per_second_squared
   }
 
   @@operator_actions = {}
@@ -60,6 +68,9 @@ module Alchemist
       :gray => 1.0, :grays => 1.0, :Gy => 1.0,
       :rad => 1.0e-2, :rads => 1.0e-2
     },
+		:acceleration  => {
+			:metre_per_second_squared => 1, 
+		},
     :angles => {
       :radian => 1.0, :radians => 1.0,
       :degree => Math::PI / 180.0, :degrees => Math::PI / 180.0,
@@ -139,12 +150,6 @@ module Alchemist
       :length_of_a_double_decker_bus => 8.4, :height_of_a_double_decker_bus => 4.4,
       :smoot => 1.7018, :smoots => 1.7018
     },
-		:velocity => {
-			:metre_per_second => 1
-		},
-		:acceleration  => {
-			:metre_per_second_squared => 1
-		},
     :dose_equivalent => {
       :sievert => 1.0, :sieverts => 1.0, :Si => 1.0,
       :rem => 1.0e-2, :rems => 1.0e-2
@@ -338,6 +343,12 @@ module Alchemist
       :megaannum => 3.1536e+16, :Ma => 3.1536e+16, :megaannums => 3.1536e+16,
       :galactic_year => 7.884e+18, :galactic_years => 7.884e+18, :GY => 7.884e+18
     },
+		:velocity => {
+			:metre_per_second => 1,
+			:miles_per_hour => 2.23693629,
+			:kilometers_per_hour => 3.6,
+			:kmh => 3.6
+		},
     :volume => {
       :litre => 1.0, :liter => 1.0, :litres => 1.0, :liters => 1.0, :l => 1.0, :L => 1.0,
       :barrel => 1.589873e+2, :barrels => 1.589873e+2,
