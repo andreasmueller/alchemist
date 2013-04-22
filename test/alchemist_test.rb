@@ -233,5 +233,16 @@ class AlchemistTest < Test::Unit::TestCase
     assert 1.ampere.unit_symbol_t.to_s == "A"
 	end
 
+	def test_standard_gravity
+		assert_in_delta(1.metre_per_second_squared.to.standard_gravity.to_f, 0.10197162129779283, 1e-5)
+		assert_in_delta(1.standard_gravity.to.metre_per_second_squared.to_f, 9.80665, 1e-5)
+    I18n.locale = "en"
+    assert 1.standard_gravity.unit_name_t.to_s == "times standard gravity"
+    assert 1.standard_gravity.unit_symbol_t.to_s == "g"
+    I18n.locale = "de"
+    assert 1.standard_gravity.unit_name_t.to_s == "mal Erdbeschleunigung"
+    assert 1.standard_gravity.unit_symbol_t.to_s == "g"
+	end
+
 end
 

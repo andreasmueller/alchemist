@@ -69,7 +69,8 @@ module Alchemist
       :rad => 1.0e-2, :rads => 1.0e-2
     },
 		:acceleration  => {
-			:metre_per_second_squared => 1, 
+			:metre_per_second_squared => 1,
+			:standard_gravity => 9.80665
 		},
     :angles => {
       :radian => 1.0, :radians => 1.0,

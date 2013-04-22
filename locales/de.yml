@@ -141,6 +141,11 @@ de:
           one: "Meter pro Sekunde im Quadrat"
           many: "Meter pro Sekunde im Quadrat"
         symbol: "m/s²"
+      standard_gravity:
+        name:
+          one: "mal Erdbeschleunigung"
+          many: "mal Erdbeschleunigung"
+        symbol: "g"
     frequency:
       hertz:
         name:

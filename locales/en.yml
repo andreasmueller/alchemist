@@ -141,6 +141,11 @@ en:
           one: "metre per second squared"
           many: "metres per second squared"
         symbol: "m/s²"
+      standard_gravity:
+        name:
+          one: "times standard gravity"
+          many: "times standard gravity"
+        symbol: "g"
     frequency:
       hertz:
         name:
