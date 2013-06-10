@@ -65,6 +65,12 @@ en:
           one: "volt"
           many: "volts"
         symbol: "V"
+    electrical_impedance:
+      ohm:
+        name:
+          one: "Ohm"
+          many: "Ohm"
+        symbol: "Ω"
     temperature:
       kelvin:
         name:
