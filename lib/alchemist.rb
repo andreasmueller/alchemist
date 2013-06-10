@@ -23,6 +23,7 @@ module Alchemist
     :time => :second,
     :temperature => :celsius,
     :electromotive_force => :volt,
+    :electrical_impedance => :ohm,
     :power => :watt,
     :illuminance => :lux,
     :pressure => :pascal,
@@ -32,6 +33,7 @@ module Alchemist
     :time => :second,
     :temperature => :fahrenheit,
     :electromotive_force => :volt,
+    :electrical_impedance => :ohm,
     :power => :watt,
     :illuminance => :lux,
     :power => :psi,
@@ -648,4 +650,3 @@ class Numeric
 end
 
 require 'alchemist/compound'
-
