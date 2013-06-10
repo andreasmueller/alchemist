@@ -32,6 +32,7 @@ module Alchemist
 		:frequency => :hertz,
 		:electric_current => :ampere,
     :electromotive_force => :volt,
+    :electrical_impedance => :ohm,
     :power => :watt,
     :illuminance => :lux,
     :pressure => :pascal,
@@ -46,6 +47,7 @@ module Alchemist
 		:frequency => :hertz,
 		:electric_current => :ampere,
     :electromotive_force => :volt,
+    :electrical_impedance => :ohm,
     :power => :watt,
     :illuminance => :lux,
     :pressure => :psi,
@@ -705,4 +707,3 @@ class Numeric
 end
 
 require 'alchemist/compound'
-
