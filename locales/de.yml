@@ -1,5 +1,36 @@
 de:
   units:
+    dimensionless:
+      unitless:
+        name:
+          one: ""
+          many: ""
+        symbol: ""
+      percent:
+        name:
+          one: "Prozent"
+          many: "Prozent"
+        symbol: "%"
+      per_mille:
+        name:
+          one: "Promille"
+          many: "Promille"
+        symbol: "‰"
+      parts_per_million:
+        name:
+          one: "part per million"
+          many: "parts per million"
+        symbol: "ppm"
+      bel:
+        name:
+          one: "Bel"
+          many: "Bel"
+        symbol: "B"
+      decibel:
+        name:
+          one: "Dezibel"
+          many: "Dezibel"
+        symbol: "dB"
     time:
       second:
         name:
@@ -16,12 +47,24 @@ de:
         name:
           one: "Watt"
           many: "Watt"
+        symbol: "W"
+      dBm:
+        name:
+          one: "dBm"
+          many: "dBm"
+        symbol: "dBm"
     electromotive_force:
       volt:
         name:
           one: "Volt"
           many: "Volt"
         symbol: "V"
+    electric_current:
+      ampere:
+        name:
+          one: "Ampere"
+          many: "Ampere"
+        symbol: "A"
     temperature:
       kelvin:
         name:
@@ -50,6 +93,16 @@ de:
           one: "Pascal"
           many: "Pascal"
         symbol: "Pa"
+      psi:
+        name:
+          one: "pound per square inch"
+          many: "pounds per square inch"
+        symbol: "psi"
+      pf_value:
+        name:
+          one: "pF-Wert"
+          many: "pF-Wert"
+        symbol: "pF"
     distance:
       meter:
         name:
@@ -69,11 +122,38 @@ de:
       feet:
         name:
           one: "Fuss"
-          many: "Füsse"
+          many: "Fuss"
         symbol: "ft"
       inch:
         name:
           one: "Zoll"
           many: "Zoll"
         symbol: "in"
-
+    velocity:
+      metre_per_second:
+        name:
+          one: "Meter pro Sekunde"
+          many: "Meter pro Sekunde"
+        symbol: "m/s"
+    acceleration:
+      metre_per_second_squared:
+        name:
+          one: "Meter pro Sekunde im Quadrat"
+          many: "Meter pro Sekunde im Quadrat"
+        symbol: "m/s²"
+      standard_gravity:
+        name:
+          one: "mal Erdbeschleunigung"
+          many: "mal Erdbeschleunigung"
+        symbol: "g"
+    frequency:
+      hertz:
+        name:
+          one: "Hertz"
+          many: "Hertz"
+        symbol: "Hz"
+      revolutions_per_minute:
+        name:
+          one: "Umdrehung pro Minute"
+          many: "Umdrehungen pro Minute"
+        symbol: "RPM"

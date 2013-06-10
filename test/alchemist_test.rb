@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 $:.unshift(File.dirname(__FILE__) + '../lib')
 
 require 'test/unit'
@@ -74,7 +76,7 @@ class AlchemistTest < Test::Unit::TestCase
 
   def test_temperature
     assert_equal(1.fahrenheit, 1.fahrenheit)
-    assert_in_delta(1.fahrenheit, 1.fahrenheit.to.fahrenheit, 1e-5)
+    assert_in_delta(1.fahrenheit.to_f, 1.fahrenheit.to.celsius.to.fahrenheit.to_f, 1e-5)
   end
 
   def test_density
@@ -86,6 +88,20 @@ class AlchemistTest < Test::Unit::TestCase
   def test_is_si_unit
     assert Alchemist.is_si_unit?("meter")
     assert !Alchemist.is_si_unit?("foot")
+  end
+
+  def test_is_valid_unit
+    assert Alchemist.is_valid_unit?("meter")
+    assert Alchemist.is_valid_unit?("foot")
+    assert !Alchemist.is_valid_unit?("foobar")
+  end
+
+  def test_is_compatible_unit
+    assert Alchemist.is_compatible_unit?("kelvin", "celsius")
+    assert Alchemist.is_compatible_unit?("fahrenheit", "celsius")
+    assert !Alchemist.is_compatible_unit?("fahrenheit", "foobar")
+    assert !Alchemist.is_compatible_unit?("foobar", "foobar")
+    assert !Alchemist.is_compatible_unit?("kelvin", "meter")
   end
 
   def test_dBm
@@ -100,8 +116,8 @@ class AlchemistTest < Test::Unit::TestCase
 
   def test_i18n
     I18n.locale = "en"
-    assert 1.celsius.unit_name_t == "degree celsius"
-    assert 2.celsius.unit_name_t == "degrees celsius"
+    assert 1.celsius.unit_name_t == "degree Celsius"
+    assert 2.celsius.unit_name_t == "degrees Celsius"
     assert 1.celsius.unit_symbol_t == "°C"
     I18n.locale = "de"
     assert 1.celsius.unit_name_t == "Grad Celsius"
@@ -111,7 +127,7 @@ class AlchemistTest < Test::Unit::TestCase
 
   def test_to_s
     I18n.locale = "en"
-    assert 1.celsius.to_s == "1.0 °C"
+    assert 1.celsius.to_s == "1.0 °C"
   end
 
   def test_to_regional_unit
@@ -119,8 +135,8 @@ class AlchemistTest < Test::Unit::TestCase
     assert 10.kelvin.to_regional_unit("ch").unit_name.to_s == "celsius"
     # also works with locales:
     I18n.locale = "en"
-    assert 10.kelvin.to_regional_unit("us").unit_name_t == "degrees fahrenheit"
-    assert 10.kelvin.to_regional_unit("ch").unit_name_t == "degrees celsius"
+    assert 10.kelvin.to_regional_unit("us").unit_name_t == "degrees Fahrenheit"
+    assert 10.kelvin.to_regional_unit("ch").unit_name_t == "degrees Celsius"
     I18n.locale = "de"
     assert 10.kelvin.to_regional_unit("us").unit_name_t == "Grad Fahrenheit"
     assert 10.kelvin.to_regional_unit("ch").unit_name_t == "Grad Celsius"
@@ -152,6 +168,81 @@ class AlchemistTest < Test::Unit::TestCase
     assert (1.cm + 1.km).unit_name_t.to_s == "meters"
     assert (1.cm + 1.km).to_f == 1000.01
   end
+
+  def test_dimensionless_units
+    I18n.locale = "en"
+    assert 1.unitless.to_s == "1.0"
+    assert 2.unitless.to_s == "2.0"
+    assert 0.5.unitless.to.percent.to_f == 50
+    assert 0.5.unitless.to.percent.to_s == "50.0 %"
+    assert 0.5.unitless.to.percent.unit_name_t == "percent"
+    assert 0.5.unitless.to.per_mille.to_f == 500
+    assert 0.5.unitless.to.per_mille.to_s == "500.0 ‰"
+    assert 0.5.unitless.to.per_mille.to_s == "500.0 ‰"
+    assert 0.000001.unitless.to.parts_per_million.to_f == 1
+    assert 0.000001.unitless.to.parts_per_million.to_s == "1.0 ppm"
+    assert 100.unitless.to.bel.to_f == 2
+    assert 1000.unitless.to.decibel.to_f == 30
+    assert 1000.unitless.to.decibel.to_s == "30.0 dB"
+  end
+
+  def test_pf_value
+    assert 1000.pascal.to.pf_value.to_f == 1
+    assert 3.pf_value.to.pascal.to_f == 100000
+    assert_in_delta(2.123.pf_value.to_f, 2.123.pf_value.to.pascal.to.pf_value.to_f, 1e-10)
+
+    I18n.locale = "en"
+    assert 1.pf_value.unit_name_t.to_s == "pF-value"
+    assert 1.pf_value.unit_symbol_t == "pF"
+
+    I18n.locale = "de"
+    assert 1.pf_value.unit_name_t.to_s == "pF-Wert"
+    assert 1.pf_value.unit_symbol_t == "pF"
+  end
+
+  def test_pressure
+    I18n.locale = "en"
+    assert 1.pascal.to_regional_unit('ch').unit_name_t.to_s == "pascal"
+    assert 2.pascal.to_regional_unit('ch').unit_name_t.to_s == "pascals"
+    assert 1.pascal.to_regional_unit('us').unit_name_t.to_s == "pounds per square inch"
+    I18n.locale = "de"
+    assert 1.pascal.to_regional_unit('ch').unit_name_t.to_s == "Pascal"
+    assert 2.pascal.to_regional_unit('ch').unit_name_t.to_s == "Pascal"
+    assert 1.pascal.to_regional_unit('us').unit_name_t.to_s == "pounds per square inch"
+  end
+
+	def test_frequency
+		assert 1.hertz.to.revolutions_per_minute.to_f == 60.0
+		assert 1.revolutions_per_minute.to.hertz.to_f == 1.0/60.0
+    I18n.locale = "en"
+    assert 1.hertz.unit_name_t.to_s == "Hertz"
+    assert 1.hertz.unit_symbol_t.to_s == "Hz"
+		assert 1.revolutions_per_minute.unit_name_t.to_s == "Revolution per minute"
+		assert 2.revolutions_per_minute.unit_name_t.to_s == "Revolutions per minute"
+		assert 1.revolutions_per_minute.unit_symbol_t.to_s == "RPM"
+	end
+
+	def test_electric_current
+    I18n.locale = "en"
+    assert 1.ampere.unit_name_t.to_s == "ampere"
+    assert 2.ampere.unit_name_t.to_s == "amperes"
+    assert 1.ampere.unit_symbol_t.to_s == "A"
+    I18n.locale = "de"
+    assert 1.ampere.unit_name_t.to_s == "Ampere"
+    assert 2.ampere.unit_name_t.to_s == "Ampere"
+    assert 1.ampere.unit_symbol_t.to_s == "A"
+	end
+
+	def test_standard_gravity
+		assert_in_delta(1.metre_per_second_squared.to.standard_gravity.to_f, 0.10197162129779283, 1e-5)
+		assert_in_delta(1.standard_gravity.to.metre_per_second_squared.to_f, 9.80665, 1e-5)
+    I18n.locale = "en"
+    assert 1.standard_gravity.unit_name_t.to_s == "times standard gravity"
+    assert 1.standard_gravity.unit_symbol_t.to_s == "g"
+    I18n.locale = "de"
+    assert 1.standard_gravity.unit_name_t.to_s == "mal Erdbeschleunigung"
+    assert 1.standard_gravity.unit_symbol_t.to_s == "g"
+	end
 
 end
 

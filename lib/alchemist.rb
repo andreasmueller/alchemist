@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 require 'rubygems' if RUBY_VERSION < '1.9'
 require 'i18n'
 
@@ -18,34 +20,60 @@ module Alchemist
   @@si_units += %w[becquerel becquerels Bq curie curies Ci]
   @@si_units += %w[kelvin]
   @@si_units += %w[second seconds s]
+  @@si_units += %w[hertz]
+  @@si_units += %w[ampere]
+  @@si_units += %w[metre_per_second metre_per_second_squared]
+  @@si_units += %w[unitless]
 
   @@common_metric_units = {
+    :dimensionless => :unitless,
     :time => :second,
     :temperature => :celsius,
+		:frequency => :hertz,
+		:electric_current => :ampere,
     :electromotive_force => :volt,
     :electrical_impedance => :ohm,
     :power => :watt,
     :illuminance => :lux,
     :pressure => :pascal,
-    :distance => :meter
+    :distance => :meter,
+		:velocity => :metre_per_second,
+		:acceleration => :metre_per_second_squared
   }
   @@common_imperial_units = {
+    :dimensionless => :unitless,
     :time => :second,
     :temperature => :fahrenheit,
+		:frequency => :hertz,
+		:electric_current => :ampere,
     :electromotive_force => :volt,
     :electrical_impedance => :ohm,
     :power => :watt,
     :illuminance => :lux,
-    :power => :psi,
-    :distance => :feet
+    :pressure => :psi,
+    :distance => :feet,
+		:velocity => :metre_per_second,
+		:acceleration => :metre_per_second_squared
   }
 
   @@operator_actions = {}
   @@conversion_table = {
+    :dimensionless => { # allow the use of alchemist for unitless conversions
+      :unitless => 1,
+      :percent => 0.01,
+      :per_mille => 0.001,
+      :parts_per_million => 1e-6,
+      :bel => [Proc.new{ |x| 10**x }, Proc.new{ |x| Math::log10(x) }],
+      :decibel => [Proc.new{ |x| 10**(x/10.0) }, Proc.new{ |x| 10.0*Math::log10(x) }]
+    },
     :absorbed_radiation_dose => {
       :gray => 1.0, :grays => 1.0, :Gy => 1.0,
       :rad => 1.0e-2, :rads => 1.0e-2
     },
+		:acceleration  => {
+			:metre_per_second_squared => 1,
+			:standard_gravity => 9.80665
+		},
     :angles => {
       :radian => 1.0, :radians => 1.0,
       :degree => Math::PI / 180.0, :degrees => Math::PI / 180.0,
@@ -137,6 +165,9 @@ module Alchemist
       :franklin => 3.335641e-10, :franklins => 3.335641e-10, :Fr => 3.335641e-10,
       :statcoulomb => 3.335641e-10, :statcoulombs => 3.335641e-10
     },
+		:electric_current => {
+			:ampere => 1.0
+		},
     :electric_conductance => {
       :siemen => 1.0, :siemens => 1.0, :S => 1.0, :mho => 1.0,
       :abmho => 1.0e+9, :absiemen => 1.0e+9, :absiemens => 1.0e+9,
@@ -185,6 +216,10 @@ module Alchemist
       :pound_force => 4.448222, :lbf => 4.448222,
       :ton_force => 8.896443e+3
     },
+		:frequency => {
+			:hertz => 1.0,
+			:revolutions_per_minute => 0.016666666666666666
+		},
     :illuminance => {
       :lux => 1.0, :lx => 1.0, :lumens_per_square_metre => 1.0, :lumens_per_square_meter => 1.0, :lumen_per_square_metre => 1.0, :lumen_per_square_meter => 1.0,
       :phot => 1.0e+4, :phots => 1.0e+4, :ph => 1.0e+4,
@@ -275,7 +310,8 @@ module Alchemist
       :poundal_per_square_foot => 1.488164, :poundals_per_square_foot => 1.488164,
       :pound_force_per_square_foot => 47.88026,
       :pound_force_per_square_inch => 6.894757e+3, :psi => 6.894757e+3,
-      :torr => 1.333224e+2, :torrs => 1.333224e+2
+      :torr => 1.333224e+2, :torrs => 1.333224e+2,
+      :pf_value => [Proc.new{ |pf| 100.0*10**pf}, Proc.new{ |pascal| Math.log10(pascal/100.0)}]
     },
     :radioactivity => {
       :becquerel => 1.0, :becquerels => 1.0, :Bq => 1.0,
@@ -310,6 +346,12 @@ module Alchemist
       :megaannum => 3.1536e+16, :Ma => 3.1536e+16, :megaannums => 3.1536e+16,
       :galactic_year => 7.884e+18, :galactic_years => 7.884e+18, :GY => 7.884e+18
     },
+		:velocity => {
+			:metre_per_second => 1,
+			:miles_per_hour => 2.23693629,
+			:kilometers_per_hour => 3.6,
+			:kmh => 3.6
+		},
     :volume => {
       :litre => 1.0, :liter => 1.0, :litres => 1.0, :liters => 1.0, :l => 1.0, :L => 1.0,
       :barrel => 1.589873e+2, :barrels => 1.589873e+2,
@@ -481,18 +523,22 @@ module Alchemist
 
     def unit_name_t # returns the translated unit name
       if @value == 1
-        return I18n.t("units.#{Conversions[@unit_name]}.#{@prefix_name}#{@unit_name}.name.one")
+        return I18n.t("units.#{Conversions[@unit_name][0]}.#{@prefix_name}#{@unit_name}.name.one")
       else
-        return I18n.t("units.#{Conversions[@unit_name]}.#{@prefix_name}#{@unit_name}.name.many")
+        return I18n.t("units.#{Conversions[@unit_name][0]}.#{@prefix_name}#{@unit_name}.name.many")
       end
     end
 
     def unit_symbol_t # returns the translated unit symbol
-      return I18n.t("units.#{Conversions[@unit_name]}.#{@prefix_name}#{@unit_name}.symbol")
+      return I18n.t("units.#{Conversions[@unit_name][0]}.#{@prefix_name}#{@unit_name}.symbol")
     end
 
     def to_s
-      (@exponent * @value).to_s + " " + self.unit_symbol_t
+			if @unit_name == :unitless
+				return (@exponent * @value).to_s
+			else
+				return (@exponent * @value).to_s + " " + self.unit_symbol_t
+			end
     end
 
     def get_regional_unit(country)
@@ -619,10 +665,10 @@ module Alchemist
     end
   end
 
-	def self.register_operation_conversions type, other_type, operation, converted_type
-	  @@operator_actions[operation] ||= []
+  def self.register_operation_conversions type, other_type, operation, converted_type
+    @@operator_actions[operation] ||= []
     @@operator_actions[operation] << [type, other_type, converted_type]
-	end
+  end
 
   def self.parse_prefix(unit)
     @@unit_prefixes.each do |prefix, value|
@@ -635,6 +681,17 @@ module Alchemist
 
   def self.is_si_unit?(unit)
     return @@si_units.include?(unit.to_s)
+  end
+
+  def self.is_valid_unit?(unit)
+    return Conversions.has_key?(unit.to_sym)
+  end
+
+  def self.is_compatible_unit?(unit1, unit2)
+    if not (Conversions.has_key?(unit1.to_sym) and Conversions.has_key?(unit2.to_sym))
+      return false
+    end
+    return Conversions[unit1.to_sym][0] == Conversions[unit2.to_sym][0]
   end
 
   @@conversion_table.each do |type, conversions|

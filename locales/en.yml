@@ -1,5 +1,36 @@
 en:
   units:
+    dimensionless:
+      unitless:
+        name:
+          one: ""
+          many: ""
+        symbol: ""
+      percent:
+        name:
+          one: "percent"
+          many: "percent"
+        symbol: "%"
+      per_mille:
+        name:
+          one: "per mille"
+          many: "per mille"
+        symbol: "‰"
+      parts_per_million:
+        name:
+          one: "part per million"
+          many: "parts per million"
+        symbol: "ppm"
+      bel:
+        name:
+          one: "bel"
+          many: "bel"
+        symbol: "B"
+      decibel:
+        name:
+          one: "decibel"
+          many: "decibel"
+        symbol: "dB"
     time:
       second:
         name:
@@ -16,6 +47,18 @@ en:
         name:
           one: "watt"
           many: "watts"
+        symbol: "W"
+      dBm:
+        name:
+          one: "dBm"
+          many: "dBm"
+        symbol: "dBm"
+    electric_current:
+      ampere:
+        name:
+          one: "ampere"
+          many: "amperes"
+        symbol: "A"
     electromotive_force:
       volt:
         name:
@@ -25,18 +68,18 @@ en:
     temperature:
       kelvin:
         name:
-          one: "kelvin"
-          many: "kelvins"
+          one: "Kelvin"
+          many: "Kelvin"
         symbol: "K"
       celsius:
         name:
-          one: "degree celsius"
-          many: "degrees celsius"
+          one: "degree Celsius"
+          many: "degrees Celsius"
         symbol: "°C"
       fahrenheit:
         name:
-          one: "degree fahrenheit"
-          many: "degrees fahrenheit"
+          one: "degree Fahrenheit"
+          many: "degrees Fahrenheit"
         symbol: "°F"
     illuminance:
       lux:
@@ -50,6 +93,16 @@ en:
           one: "pascal"
           many: "pascals"
         symbol: "Pa"
+      psi:
+        name:
+          one: "pound per square inch"
+          many: "pounds per square inch"
+        symbol: "psi"
+      pf_value:
+        name:
+          one: "pF-value"
+          many: "pF-value"
+        symbol: "pF"
     distance:
       meter:
         name:
@@ -76,4 +129,31 @@ en:
           one: "inch"
           many: "inches"
         symbol: "in"
-
+    velocity:
+      metre_per_second:
+        name:
+          one: "metre per second"
+          many: "metres per second"
+        symbol: "m/s"
+    acceleration:
+      metre_per_second_squared:
+        name:
+          one: "metre per second squared"
+          many: "metres per second squared"
+        symbol: "m/s²"
+      standard_gravity:
+        name:
+          one: "times standard gravity"
+          many: "times standard gravity"
+        symbol: "g"
+    frequency:
+      hertz:
+        name:
+          one: "Hertz"
+          many: "Hertz"
+        symbol: "Hz"
+      revolutions_per_minute:
+        name:
+          one: "Revolution per minute"
+          many: "Revolutions per minute"
+        symbol: "RPM"
