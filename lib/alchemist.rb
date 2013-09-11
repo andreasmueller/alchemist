@@ -24,6 +24,7 @@ module Alchemist
   @@si_units += %w[ampere]
   @@si_units += %w[metre_per_second metre_per_second_squared]
   @@si_units += %w[unitless]
+  @@si_units += %w[pieces_per_cubic_metre]
 
   @@common_metric_units = {
     :dimensionless => :unitless,
@@ -38,7 +39,8 @@ module Alchemist
     :pressure => :pascal,
     :distance => :meter,
 		:velocity => :metre_per_second,
-		:acceleration => :metre_per_second_squared
+		:acceleration => :metre_per_second_squared,
+    :particulate_matter_concentration => :pieces_per_cubic_metre
   }
   @@common_imperial_units = {
     :dimensionless => :unitless,
@@ -53,7 +55,8 @@ module Alchemist
     :pressure => :psi,
     :distance => :feet,
 		:velocity => :metre_per_second,
-		:acceleration => :metre_per_second_squared
+		:acceleration => :metre_per_second_squared,
+    :particulate_matter_concentration => :pieces_per_cubic_foot
   }
 
   @@operator_actions = {}
@@ -264,6 +267,10 @@ module Alchemist
       :ton => 907184.74, :tons => 907184.74, :short_tons => 907184.74,
       #unusual measurements
       :elephant => 5443108.44, :elephants => 5443108.44
+    },
+    :particulate_matter_concentration => {
+      :pieces_per_cubic_metre => 1.0,
+      :pieces_per_cubic_foot => 35.314667
     },
     :power => {
       :watt => 1.0, :watts => 1.0, :W => 1.0,

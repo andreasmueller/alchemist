@@ -244,5 +244,18 @@ class AlchemistTest < Test::Unit::TestCase
     assert 1.standard_gravity.unit_symbol_t.to_s == "g"
 	end
 
+  def test_particulate_matter_concentration
+		assert_in_delta(1.pieces_per_cubic_metre.to.pieces_per_cubic_foot.to_f, 0.0283168, 1e-5)
+		assert_in_delta(1.pieces_per_cubic_foot.to.pieces_per_cubic_metre.to_f, 35.3146667, 1e-5)
+    I18n.locale = "en"
+    assert 1.pieces_per_cubic_metre.unit_name_t.to_s == "piece per cubic metre"
+    assert 2.pieces_per_cubic_metre.unit_name_t.to_s == "pieces per cubic metre"
+    assert 1.pieces_per_cubic_metre.unit_symbol_t.to_s == "pcs/m³"
+    I18n.locale = "de"
+    assert 1.pieces_per_cubic_metre.unit_name_t.to_s == "Partikel pro Kubikmeter"
+    assert 2.pieces_per_cubic_metre.unit_name_t.to_s == "Partikel pro Kubikmeter"
+    assert 1.pieces_per_cubic_metre.unit_symbol_t.to_s == "part./m³"
+  end
+
 end
 

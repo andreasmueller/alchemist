@@ -157,3 +157,14 @@ de:
           one: "Umdrehung pro Minute"
           many: "Umdrehungen pro Minute"
         symbol: "RPM"
+    particulate_matter_concentration:
+      pieces_per_cubic_metre:
+        name:
+          one: "Partikel pro Kubikmeter"
+          many: "Partikel pro Kubikmeter"
+        symbol: "part./m³"
+      pieces_per_cubic_foot:
+        name:
+          one: "Partikel pro Kubikfuss"
+          many: "Partikel pro Kubikfuss"
+        symbol: "part./cft"

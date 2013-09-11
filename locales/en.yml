@@ -163,3 +163,14 @@ en:
           one: "Revolution per minute"
           many: "Revolutions per minute"
         symbol: "RPM"
+    particulate_matter_concentration:
+      pieces_per_cubic_metre:
+        name:
+          one: "piece per cubic metre"
+          many: "pieces per cubic metre"
+        symbol: "pcs/m³"
+      pieces_per_cubic_foot:
+        name:
+          one: "piece per cubic foot"
+          many: "pieces per cubic foot"
+        symbol: "pcs/cft"
