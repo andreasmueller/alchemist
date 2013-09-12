@@ -245,6 +245,11 @@ class AlchemistTest < Test::Unit::TestCase
 	end
 
   def test_particulate_matter_concentration
+    assert Alchemist.is_valid_unit?("pieces_per_cubic_metre")
+    assert Alchemist.is_valid_unit?("pieces_per_cubic_foot")
+    assert Alchemist.is_si_unit?("pieces_per_cubic_metre")
+    assert !Alchemist.is_si_unit?("pieces_per_cubic_foot")
+
 		assert_in_delta(1.pieces_per_cubic_metre.to.pieces_per_cubic_foot.to_f, 0.0283168, 1e-5)
 		assert_in_delta(1.pieces_per_cubic_foot.to.pieces_per_cubic_metre.to_f, 35.3146667, 1e-5)
     I18n.locale = "en"
