@@ -709,8 +709,8 @@ module Alchemist
   end
 end
 
-class Numeric
-  include Alchemist
-end
+# class Numeric
+#   include Alchemist
+# end
 
 require 'alchemist/compound'

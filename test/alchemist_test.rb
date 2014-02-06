@@ -13,6 +13,10 @@ class Float
   end
 end
 
+class Numeric
+  include Alchemist
+end
+
 class AlchemistTest < Test::Unit::TestCase
 
   def test_equivalence
