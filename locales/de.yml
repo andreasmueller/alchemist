@@ -168,3 +168,19 @@ de:
           one: "Partikel pro Kubikfuss"
           many: "Partikel pro Kubikfuss"
         symbol: "part./cft"
+    volumetric_flow_rate:
+      cubic_metres_per_second:
+        name:
+          one: "Kubikmeter pro Sekunde"
+          many: "Kubikmeter pro Sekunde"
+        symbol: "m³/s"
+      litres_per_minute:
+        name:
+          one: "Liter pro Minute"
+          many: "Liter pro Minute"
+        symbol: "L/min"
+      cubic_feet_per_second:
+        name:
+          one: "Kubikfuss pro Sekunde"
+          many: "Kubikfuss pro Sekunde"
+        symbol: "cfs"

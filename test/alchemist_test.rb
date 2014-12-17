@@ -19,6 +19,10 @@ end
 
 class AlchemistTest < Test::Unit::TestCase
 
+  def setup
+    I18n.enforce_available_locales = false
+  end
+
   def test_equivalence
     assert_equal(1.m, 1.meter)
   end
@@ -266,5 +270,27 @@ class AlchemistTest < Test::Unit::TestCase
     assert 1.pieces_per_cubic_metre.unit_symbol_t.to_s == "part./m³"
   end
 
+  def test_volumetric_flow_rate
+    assert Alchemist.is_valid_unit?("cubic_metres_per_second")
+    assert Alchemist.is_si_unit?("cubic_metres_per_second")
+    assert Alchemist.is_valid_unit?("litres_per_minute")
+    assert !Alchemist.is_si_unit?("litres_per_minute")
+    assert Alchemist.is_valid_unit?("cubic_feet_per_second")
+    assert !Alchemist.is_si_unit?("cubic_feet_per_second")
+
+		assert_in_delta(1.cubic_metres_per_second.to.litres_per_minute.to_f, 60000, 1e-2)
+		assert_in_delta(1.litres_per_minute.to.cubic_metres_per_second.to_f, 1.6666667e-5, 1e-5)
+		assert_in_delta(1.cubic_metres_per_second.to.cubic_feet_per_second.to_f, 35.3146667, 1e-2)
+		assert_in_delta(1.cubic_feet_per_second.to.cubic_metres_per_second.to_f, 0.0283168, 1e-5)
+
+    I18n.locale = "en"
+    assert 1.cubic_metres_per_second.unit_name_t.to_s == "cubic metre per second"
+    assert 2.cubic_metres_per_second.unit_name_t.to_s == "cubic metres per second"
+    assert 1.cubic_metres_per_second.unit_symbol_t.to_s == "m³/s"
+    I18n.locale = "de"
+    assert 1.cubic_metres_per_second.unit_name_t.to_s == "Kubikmeter pro Sekunde"
+    assert 2.cubic_metres_per_second.unit_name_t.to_s == "Kubikmeter pro Sekunde"
+    assert 1.cubic_metres_per_second.unit_symbol_t.to_s == "m³/s"
+  end
 end
 

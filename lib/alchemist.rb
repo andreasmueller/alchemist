@@ -25,6 +25,7 @@ module Alchemist
   @@si_units += %w[metre_per_second metre_per_second_squared]
   @@si_units += %w[unitless]
   @@si_units += %w[pieces_per_cubic_metre]
+  @@si_units += %w[cubic_metres_per_second]
 
   @@common_metric_units = {
     :dimensionless => :unitless,
@@ -40,7 +41,8 @@ module Alchemist
     :distance => :meter,
 		:velocity => :metre_per_second,
 		:acceleration => :metre_per_second_squared,
-    :particulate_matter_concentration => :pieces_per_cubic_metre
+    :particulate_matter_concentration => :pieces_per_cubic_metre,
+    :volumetric_flow_rate => :litres_per_minute
   }
   @@common_imperial_units = {
     :dimensionless => :unitless,
@@ -56,7 +58,8 @@ module Alchemist
     :distance => :feet,
 		:velocity => :metre_per_second,
 		:acceleration => :metre_per_second_squared,
-    :particulate_matter_concentration => :pieces_per_cubic_foot
+    :particulate_matter_concentration => :pieces_per_cubic_foot,
+    :volumetric_flow_rate => :cubic_feet_per_second
   }
 
   @@operator_actions = {}
@@ -379,6 +382,11 @@ module Alchemist
       :teaspoon => 0.00492892159, :teaspoons => 0.00492892159,
       #unusual measurements
       :sydharb => 5.0e+11, :sydharbs => 5.0e+11
+    },
+    :volumetric_flow_rate => {
+      :cubic_metres_per_second => 1.0,
+      :litres_per_minute => 1.6666667e-5,
+      :cubic_feet_per_second => 0.02832
     }
   }
   @@unit_prefixes = {

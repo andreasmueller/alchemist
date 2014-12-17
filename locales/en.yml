@@ -174,3 +174,19 @@ en:
           one: "piece per cubic foot"
           many: "pieces per cubic foot"
         symbol: "pcs/cft"
+    volumetric_flow_rate:
+      cubic_metres_per_second:
+        name:
+          one: "cubic metre per second"
+          many: "cubic metres per second"
+        symbol: "m³/s"
+      litres_per_minute:
+        name:
+          one: "litre per minute"
+          many: "litres per minute"
+        symbol: "L/min"
+      cubic_feet_per_second:
+        name:
+          one: "cubic foot per second"
+          many: "cubic feet per second"
+        symbol: "cfs"
